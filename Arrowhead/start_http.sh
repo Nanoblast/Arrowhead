@@ -1,0 +1,1 @@
+/home/ArrowheadTest/HttpServer/shell2http -port 8888 -cgi -form /hello_world "cat ui/serviceRegistry.html" /registerService "./registerService.sh" /getServices "cat ui/services.html" /myjs.js ui/myjs.js

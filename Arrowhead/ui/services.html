@@ -1,0 +1,17 @@
+
+<html>
+<head>
+    <h1>Registered services</h1>
+</head>
+<body>
+    <iframe id='iframe' src="ui/services.json" onload='readfile()' height="90%" width="60%"></iframe>
+</body>
+<script>
+    function readfile() {
+        alert(
+            document.getElementById('iframe').contentDocument.body.firstChild.innerHTML
+        );
+    }
+</script>
+<script src="myjs.js"></script>
+</html>
