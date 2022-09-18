@@ -1,0 +1,1 @@
+curl -v -s --insecure --cert-type P12 --cert ../test-amit-beirok-holnap/test-amit-beirok-holnap.p12:123456 -X POST -H "Content-Type: application/json" -d @orchestration.request.test https://127.0.0.1:8441/orchestrator/orchestration | jq

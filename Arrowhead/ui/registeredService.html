@@ -6,15 +6,18 @@
         <form action="/registerService" method="POST" class="ui form" >
             <div class="field">
                 <label for="serviceName">Service name:</label>
-                <input type="text" id="serviceName" name="serviceName" style="width:800px"> <br>
+                <input type="text" id="serviceName" name="serviceName" style="width:800px" disabled> <br>
             </div>
             <div class="field">
                 <label for="serviceDefinition">Service definition:</label>
-                <input type="text" id="serviceDefinition" name="serviceDefinition"> <br>
+                <input disabled type="text" id="serviceDefinition" name="serviceDefinition"> <br>
             </div>
             <div class="field"> 
                 <label for="port">Service name:</label> 
-                <input type="text" id="port" name="port"> <br>
+                <input type="text" id="port" name="port"disabled> <br>
+            </div>
+            <div class="field"> 
+                <label for="port">Service successfully registed!</label> 
             </div>
             <button type="submit" class="ui button"> Submit </button> <br> 
         </form>
@@ -26,7 +29,12 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
           />
-          <script src="https://cdn.jsdelivr.net/npm/semantic-ui-react/dist/umd/semantic-ui-react.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/semantic-ui-react/dist/umd/semantic-ui-react.min.js">
+          </script>
     </body>
+    <script>
+        alert("Service successfully registered!");
+        window.location.href = '/';
+    </script>
 </html>
     

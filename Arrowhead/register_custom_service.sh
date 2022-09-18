@@ -15,4 +15,4 @@ jq ".interfaces = [\"HTTP-SECURE-JSON\"] | del ( .metadata ) | del ( .version ) 
 
 
 ## SEND REQUEST / STORE RESPONSE
-curl -v -s --insecure --cert-type P12 --cert tc2-alpine1provider.p12:123456 -X GET https://127.0.0.1:8443/serviceregistry/mgmt > http_response_mgmt.log
+curl -v -s --insecure --cert-type P12 --cert tc2-alpine1provider.p12:123456 -X POST https://127.0.0.1:8443/serviceregistry/register > http_response.log

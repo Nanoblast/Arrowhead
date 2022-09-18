@@ -1,0 +1,12 @@
+{
+  "consumerId": "27",
+  "interfaceIds": [
+    "1"
+  ],
+  "providerIds": [
+    "8"
+  ],
+  "serviceDefinitionIds": [
+    "33"
+  ]
+}

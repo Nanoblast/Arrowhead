@@ -1,0 +1,33 @@
+{
+  "requesterSystem" : {
+    "systemName" : "car_consumer_demo",
+    "address" : " localhost",
+    "port" : 8080,
+    "authenticationInfo" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBnrg7kgYJqsAObZ87Qb1BITnzt4mx+MwKuC2UOWsIgq8tE+3+g24HgrUlIlxCm7uczhZRmM/rSEqMgL4dszpYqz1+eFgCXaawegTWJa4yrCurcrC5rLXfHtydOojlOG1qb9Ij+0inJLR7msnj4oYSlHKinj9oDIq+xk2feB3lh7SI9zS1u13c+iBjw7NCwfq41NJXm4+iWGJwd1S2M7N7/qjBf3o0iz7SqElNP2DZxpjw32k8Vtqq+RPFPNsWiukOya/5c5WKhBjieRIX0NMdFlTzlo8jzdpSFnGN8kuByfHfWDJTvrUJoR6aOz2TzKXbTiZPDuH9cgbNJQQra8uQIDAQAB"
+  },
+  "requesterCloud" : null,
+  "requestedService" : {
+    "serviceDefinitionRequirement" : "create-car",
+    "interfaceRequirements" : [ "HTTPS-SECURE-JSON" ],
+    "securityRequirements" : null,
+    "metadataRequirements" : null,
+    "versionRequirement" : null,
+    "minVersionRequirement" : null,
+    "maxVersionRequirement" : null,
+    "pingProviders" : false
+  },
+  "orchestrationFlags" : {
+    "onlyPreferred" : false,
+    "overrideStore" : true,
+    "externalServiceRequest" : false,
+    "enableInterCloud" : false,
+    "enableQoS" : false,
+    "matchmaking" : true,
+    "metadataSearch" : false,
+    "triggerInterCloud" : false,
+    "pingProviders" : false
+  },
+  "preferredProviders" : [ ],
+  "commands" : { },
+  "qosRequirements" : { }
+}
