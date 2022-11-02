@@ -10,12 +10,35 @@ A rendszer haszálata előtt az alábbi lépéseket szükséges elvégezni:
 - Második feladat az Arrowhead Keretrendszer komponenseinek elindítása, ehhez az alábbi utasítás szükséges:  ``` /home/sysop/utils/start_services.sh ``` Az indítás néhány percet vesz igénybe, a rendszer elindulása ellenőrizhető a ``` netstat -tlpn ``` parancs segítségével. A szükséges szolgáltatások a ``` 8441, 8443, 8445, 18441, 18443, 18445``` portokon indulnak el. Ezek után a rendszer használatra kész. 
 
 # Service registry
-A szolgáltatások regisztrációjáért és lekérdezéséért felelős modult a  ``` localhost:8443 ``` címen lehet elérni. A rendszer a HTTP kéréseknél TLS titkosítást használ, melyhez P12-es tanúsítványokra van szükség. Az egyszerűség kedvéért a demoban a tanusítványmenedzsmenttel nem kell foglalkozni, azt előre elkészített tanúsítvánnyal (pl Sysop tanúsítvány) vagy automatizált scripttel oldjuk meg. Ugyanakkor a mélyebben érdeklődöknek érdemes áttanulmányozni a hivatalos leírás tanúsítványokra vonatkozó fejezeteit. 
+A szolgáltatások regisztrációjáért és lekérdezéséért felelős modult a  ``` localhost:8443/serviceregistry ``` címen lehet elérni. A rendszer a HTTP kéréseknél TLS titkosítást használ, melyhez P12-es tanúsítványokra van szükség. Az egyszerűség kedvéért a demoban a tanusítványmenedzsmenttel nem kell foglalkozni, azt előre elkészített tanúsítvánnyal (pl Sysop tanúsítvány) vagy automatizált scripttel oldjuk meg. Ugyanakkor a mélyebben érdeklődöknek érdemes áttanulmányozni a hivatalos leírás tanúsítványokra vonatkozó fejezeteit. 
 
 Érdemes a Service Registry tartalmát listázni, ezzel validálható, hogy a rendszer elfogadja a használt tanúsítványt. A lekérdezéshez az alábbi utasítás használható: ``` curl -v -s --insecure --cert-type P12 --cert /usr/share/arrowhead/certificates/testcloud2/sysop.p12:123456 -X GET https://localhost:8443/serviceregistry/mgmt | jq ```
 
 Szolgáltatás regisztrációjához minden szolgáltatáshoz új tanúsítványokat kell létrehozni. Ezek a lépések a Hello World demoban automatizáltan történnek, a regisztrációs felület böngészőből a ``` localhost:8888/serviceregistry ``` oldalon érhető el. Regisztráció után érdemes az új szolgáltatást az előző lépésben használt lekérdezéssel validálni. 
 
 # Authorization 
+Az Authorization a szolgáltatások közötti hozzáférési szabályokat kezeli. Az demoban az authorizációs szabályok direkt, kézi meghatalmazással kerülnek beállításra, viszont komplexebb szinten lehetőség van a szabályokat rugalmasabban, dinamikusabban kezelni. Hozzáférési szabály hozzáadásához a ``` localhost:8445/authorization/mgmt/intracloud ``` címre szükséges egy érvényes intracloud szabályt beküldeni, a minta lentebb látható:
+
+```json
+{
+  "consumer": {
+    "address": "string",
+    "authenticationInfo": "string",
+    "port": 0,
+    "systemName": "string"
+  },
+  "providerIdsWithInterfaceIds": [
+    {
+      "id": 0,
+      "idList": [
+        0
+      ]
+    }
+  ],
+  "serviceDefinitionId": 0
+}
+```
+
+Sikeres hozzáadás esetén a kérés válaszában a provider és a consumer információ megjelennek az IntracloudRuleList objektumban. Amennyiben egy provider hozzáférést kapott a consumerhez megkezdhető az orchestrációs folyamat.
 
 # Orchestrator
