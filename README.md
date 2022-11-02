@@ -16,6 +16,6 @@ A szolgáltatások regisztrációjáért és lekérdezéséért felelős modult 
 
 Szolgáltatás regisztrációjához minden szolgáltatáshoz új tanúsítványokat kell létrehozni. Ezek a lépések a Hello World demoban automatizáltan történnek, a regisztrációs felület böngészőből a ``` localhost:8888/serviceregistry ``` oldalon érhető el. Regisztráció után érdemes az új szolgáltatást az előző lépésben használt lekérdezéssel validálni. 
 
-# Authentication 
+# Authorization 
 
 # Orchestrator
