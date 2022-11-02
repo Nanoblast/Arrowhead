@@ -99,3 +99,6 @@ Az authorizációs szabályok hozzáadása után a consumernek rendelkeznie kell
   }
 }
 ```
+
+# Használati példa
+A demo példa 2 szolgáltatás illesztését mutatja be, majd ezeket keresztül az orchestrációs folyamat végrehajtása figyelhető meg. A provider szolgáltatás a példában egy előre definiált porton várakozó HTTP szerver mely beérkező kérés esetén HTTP válaszban ad információt, valamint egy consumer rendszer amelyik ezt az információt kéri le. A szolgáltatás a 9797-es porton tettem elérhetővé. A szolgáltatások regisztrációja böngészőben elvégezhető, a localhost:8888-as címen.
