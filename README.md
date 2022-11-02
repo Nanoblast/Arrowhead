@@ -101,6 +101,77 @@ Az authorizációs szabályok hozzáadása után a consumernek rendelkeznie kell
 ```
 
 # Használati példa
-A demo példa 2 szolgáltatás illesztését mutatja be, majd ezeket keresztül az orchestrációs folyamat végrehajtása figyelhető meg. A provider szolgáltatás a példában egy előre definiált porton várakozó HTTP szerver mely beérkező kérés esetén HTTP válaszban ad információt, valamint egy consumer rendszer amelyik ezt az információt kéri le. A szolgáltatás a 9797-es porton tettem elérhetővé. A szolgáltatások regisztrációja böngészőben elvégezhető, a localhost:8888-as címen.
-
+A demo példa 2 szolgáltatás illesztését mutatja be, majd ezeket keresztül az orchestrációs folyamat végrehajtása figyelhető meg. A provider szolgáltatás a példában egy előre definiált porton várakozó HTTP szerver mely beérkező kérés esetén HTTP válaszban ad információt, valamint egy consumer rendszer amelyik ezt az információt kéri le. A szolgáltatást a 9797-es porton tettem elérhetővé. A szolgáltatások regisztrációja böngészőben elvégezhető, a localhost:8888-as címen.
+ 
+Provider:
 ![alt text](https://github.com/Nanoblast/Arrowhead/blob/main/Arrowhead/captures/serviceregistry.JPG?raw=true)
+Consumer:
+![alt text](https://github.com/Nanoblast/Arrowhead/blob/main/Arrowhead/captures/consumer.JPG?raw=true)
+
+A szolgáltatások regisztrációját ezek után érdemes ellenőrizni. Az alábbi kódrészlet a rendszerben elérhető a korábbiakban regisztrált szolgáltatásokat listázza a Service Registryből kapott válaszban:
+```json
+   {
+      "id": 496,
+      "serviceDefinition": {
+        "id": 48,
+        "serviceDefinition": "arrowhead-demo-consumer",
+        "createdAt": "2022-11-02T15:23:55Z",
+        "updatedAt": "2022-11-02T15:23:55Z"
+      },
+      "provider": {
+        "id": 39,
+        "systemName": "arrowhead-demo-client",
+        "address": "127.0.0.1",
+        "port": 9798,
+        "authenticationInfo": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAttDE8cOgBnXeYq5k2CuFqKAGG1J5GL5FAudqDyw1iBeX+aSU+2avzclh+HKzmB2/EPr10RZjTOl6SjkIqjx/HT0jS/9gm8ibeybVlAfzna5lznEKuwiTl7S+Yxb0coBaRC0p8HLXvt8axL7hVyNHlGdVClwO+LQYUnDYR+PG8jqvSWLmA0tXTnFggiKofhqLbwIw0An6+ISsUq7iRxaQsdfGUJbrzFarw9B6bGqwgkLS4C7TuVH1YVrKpyB+f1e+hU5kseAPr1EsCK+s6dYYHzVcF3vVWe70/UO5riawQiM7iJWC5bVhoDAjpFkIwSbwtfeDYNj5rvL+6FliWk3R/QIDAQAB",
+        "createdAt": "2022-11-02T15:23:55Z",
+        "updatedAt": "2022-11-02T15:23:55Z"
+      },
+      "serviceUri": "registeredService",
+      "endOfValidity": "2023-08-24T11:03:02Z",
+      "secure": "NOT_SECURE",
+      "version": 0,
+      "interfaces": [
+        {
+          "id": 1,
+          "interfaceName": "HTTP-SECURE-JSON",
+          "createdAt": "2021-12-02T12:49:48Z",
+          "updatedAt": "2021-12-02T12:49:48Z"
+        }
+      ],
+      "createdAt": "2022-11-02T15:23:55Z",
+      "updatedAt": "2022-11-02T15:23:55Z"
+    },
+    {
+      "id": 497,
+      "serviceDefinition": {
+        "id": 49,
+        "serviceDefinition": "arrowhead-demo-provider",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "provider": {
+        "id": 40,
+        "systemName": "arrowhead-demo-server",
+        "address": "127.0.0.1",
+        "port": 9797,
+        "authenticationInfo": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAttDE8cOgBnXeYq5k2CuFqKAGG1J5GL5FAudqDyw1iBeX+aSU+2avzclh+HKzmB2/EPr10RZjTOl6SjkIqjx/HT0jS/9gm8ibeybVlAfzna5lznEKuwiTl7S+Yxb0coBaRC0p8HLXvt8axL7hVyNHlGdVClwO+LQYUnDYR+PG8jqvSWLmA0tXTnFggiKofhqLbwIw0An6+ISsUq7iRxaQsdfGUJbrzFarw9B6bGqwgkLS4C7TuVH1YVrKpyB+f1e+hU5kseAPr1EsCK+s6dYYHzVcF3vVWe70/UO5riawQiM7iJWC5bVhoDAjpFkIwSbwtfeDYNj5rvL+6FliWk3R/QIDAQAB",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "serviceUri": "registeredService",
+      "endOfValidity": "2023-08-24T11:03:02Z",
+      "secure": "NOT_SECURE",
+      "version": 0,
+      "interfaces": [
+        {
+          "id": 1,
+          "interfaceName": "HTTP-SECURE-JSON",
+          "createdAt": "2021-12-02T12:49:48Z",
+          "updatedAt": "2021-12-02T12:49:48Z"
+        }
+      ],
+      "createdAt": "2022-11-02T15:24:19Z",
+      "updatedAt": "2022-11-02T15:24:19Z"
+    }
+```
