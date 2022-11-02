@@ -53,7 +53,7 @@ Sikeres hozzáadás esetén a kérés válaszában a provider és a consumer inf
 ```
 POST /orchestrator/orchestration
 ```
-Az authrizációs szabályok hozzáadása után a consumernek rendelkeznie kell a megfelelő hozzáférési jogosultságokkal, amivel kezdeményezhető az orchestrációs folyamat. A szolgáltatások közötti dinamikus összeköttetést biztosító rendszer (Orcehstrator) interfésze a ``` localhost:8441/orchestrator ``` címen érhető el. Az összeköttetés olyan szolgáltatások között történhet meg amire a rendszer a követelményeknek megfelelő szolgáltatást talál. A követelményen a ServiceRequestForm objektumban írhatóak le:
+Az authorizációs szabályok hozzáadása után a consumernek rendelkeznie kell a megfelelő hozzáférési jogosultságokkal, amivel kezdeményezhető az orchestrációs folyamat. A szolgáltatások közötti dinamikus összeköttetést biztosító rendszer (Orcehstrator) interfésze a ``` localhost:8441/orchestrator ``` címen érhető el. Az összeköttetés olyan szolgáltatások között történhet meg amire a rendszer a követelményeknek megfelelő szolgáltatást talál. A követelményen a ServiceRequestForm objektumban írhatóak le:
 ```json
 {
   "requesterSystem": {
