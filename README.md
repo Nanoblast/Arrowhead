@@ -175,3 +175,149 @@ A szolgáltatások regisztrációját ezek után érdemes ellenőrizni. Az aláb
       "updatedAt": "2022-11-02T15:24:19Z"
     }
 ```
+Az Authorizációs sablont a fenti json válasz paramétereivel kell kitölteni. A consumer ID-t a kliens providere, a provider ID-t pedig a szerver azonosítója fogja megadni. Továbbá szükség van még a szerver serviceDefinition azonosítójára is. Az összeállított üzenet az alábbi módon néz ki:
+
+```json
+{
+  "consumerId": "39",
+  "interfaceIds": [
+    "1"
+  ],
+  "providerIds": [
+    "40"
+  ],
+  "serviceDefinitionIds": [
+    "49"
+  ]
+}
+```
+
+A kérés beküldése utána a rendszer válasza tartalmazza az elkészült hozzáférési szabályt:
+```json
+{
+  "data": [
+    {
+      "id": 12,
+      "consumerSystem": {
+        "id": 39,
+        "systemName": "arrowhead-demo-client",
+        "address": "127.0.0.1",
+        "port": 9798,
+        "authenticationInfo": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAttDE8cOgBnXeYq5k2CuFqKAGG1J5GL5FAudqDyw1iBeX+aSU+2avzclh+HKzmB2/EPr10RZjTOl6SjkIqjx/HT0jS/9gm8ibeybVlAfzna5lznEKuwiTl7S+Yxb0coBaRC0p8HLXvt8axL7hVyNHlGdVClwO+LQYUnDYR+PG8jqvSWLmA0tXTnFggiKofhqLbwIw0An6+ISsUq7iRxaQsdfGUJbrzFarw9B6bGqwgkLS4C7TuVH1YVrKpyB+f1e+hU5kseAPr1EsCK+s6dYYHzVcF3vVWe70/UO5riawQiM7iJWC5bVhoDAjpFkIwSbwtfeDYNj5rvL+6FliWk3R/QIDAQAB",
+        "createdAt": "2022-11-02T15:23:55Z",
+        "updatedAt": "2022-11-02T15:23:55Z"
+      },
+      "providerSystem": {
+        "id": 40,
+        "systemName": "arrowhead-demo-server",
+        "address": "127.0.0.1",
+        "port": 9797,
+        "authenticationInfo": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAttDE8cOgBnXeYq5k2CuFqKAGG1J5GL5FAudqDyw1iBeX+aSU+2avzclh+HKzmB2/EPr10RZjTOl6SjkIqjx/HT0jS/9gm8ibeybVlAfzna5lznEKuwiTl7S+Yxb0coBaRC0p8HLXvt8axL7hVyNHlGdVClwO+LQYUnDYR+PG8jqvSWLmA0tXTnFggiKofhqLbwIw0An6+ISsUq7iRxaQsdfGUJbrzFarw9B6bGqwgkLS4C7TuVH1YVrKpyB+f1e+hU5kseAPr1EsCK+s6dYYHzVcF3vVWe70/UO5riawQiM7iJWC5bVhoDAjpFkIwSbwtfeDYNj5rvL+6FliWk3R/QIDAQAB",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "serviceDefinition": {
+        "id": 49,
+        "serviceDefinition": "arrowhead-demo-provider",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "interfaces": [
+        {
+          "id": 1,
+          "interfaceName": "HTTP-SECURE-JSON",
+          "createdAt": "2021-12-02T12:49:48Z",
+          "updatedAt": "2021-12-02T12:49:48Z"
+        }
+      ],
+      "createdAt": "2022-11-03T17:10:27.250491Z",
+      "updatedAt": "2022-11-03T17:10:27.250491Z"
+    }
+  ],
+  "count": 1
+}
+```
+
+Ezzel minden előfeltétel teljesült, hogy a consumer orhcestrációs kérést indítson. A serviceRequest objektumnak tartalmazni kell minden olyan információt amivel a rendszer azonosítani tudja a feltételeket kielgítő szolgáltatásokat a Service Registryben:
+
+```json
+{
+  "requesterSystem" : {
+    "systemName" : "arrowhead-demo-client",
+    "address" : "127.0.0.1",
+    "port" : 9798,
+    "authenticationInfo" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsBnrg7kgYJqsAObZ87Qb1BITnzt4mx+MwKuC2UOWsIgq8tE+3+g24HgrUlIlxCm7uczhZRmM/rSEqMgL4dszpYqz1+eFgCXaawegTWJa4yrCurcrC5rLXfHtydOojlOG1qb9Ij+0inJLR7msnj4oYSlHKinj9oDIq+xk2feB3lh7SI9zS1u13c+iBjw7NCwfq41NJXm4+iWGJwd1S2M7N7/qjBf3o0iz7SqElNP2DZxpjw32k8Vtqq+RPFPNsWiukOya/5c5WKhBjieRIX0NMdFlTzlo8jzdpSFnGN8kuByfHfWDJTvrUJoR6aOz2TzKXbTiZPDuH9cgbNJQQra8uQIDAQAB"
+  },
+  "requesterCloud" : null,
+  "requestedService" : {
+    "serviceDefinitionRequirement" : "arrowhead-demo-provider",
+    "interfaceRequirements" : [ "HTTP-SECURE-JSON" ],
+    "securityRequirements" : null,
+    "metadataRequirements" : null,
+    "versionRequirement" : null,
+    "minVersionRequirement" : null,
+    "maxVersionRequirement" : null,
+    "pingProviders" : false
+  },
+  "orchestrationFlags" : {
+    "onlyPreferred" : false,
+    "overrideStore" : true,
+    "externalServiceRequest" : false,
+    "enableInterCloud" : false,
+    "enableQoS" : false,
+    "matchmaking" : true,
+    "metadataSearch" : false,
+    "triggerInterCloud" : false,
+    "pingProviders" : false
+  },
+  "preferredProviders" : [ ],
+  "commands" : { },
+  "qosRequirements" : { }
+}
+```
+A válasz tartalmazza az orchestrációs információt amely a providerhez való csatlakozási paramétereket tartalmazza.
+Az orchestrációs válasz:
+
+```json
+{
+  "response": [
+    {
+      "provider": {
+        "id": 40,
+        "systemName": "arrowhead-demo-server",
+        "address": "127.0.0.1",
+        "port": 9797,
+        "authenticationInfo": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAttDE8cOgBnXeYq5k2CuFqKAGG1J5GL5FAudqDyw1iBeX+aSU+2avzclh+HKzmB2/EPr10RZjTOl6SjkIqjx/HT0jS/9gm8ibeybVlAfzna5lznEKuwiTl7S+Yxb0coBaRC0p8HLXvt8axL7hVyNHlGdVClwO+LQYUnDYR+PG8jqvSWLmA0tXTnFggiKofhqLbwIw0An6+ISsUq7iRxaQsdfGUJbrzFarw9B6bGqwgkLS4C7TuVH1YVrKpyB+f1e+hU5kseAPr1EsCK+s6dYYHzVcF3vVWe70/UO5riawQiM7iJWC5bVhoDAjpFkIwSbwtfeDYNj5rvL+6FliWk3R/QIDAQAB",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "service": {
+        "id": 49,
+        "serviceDefinition": "arrowhead-demo-provider",
+        "createdAt": "2022-11-02T15:24:19Z",
+        "updatedAt": "2022-11-02T15:24:19Z"
+      },
+      "serviceUri": "registeredService",
+      "secure": "NOT_SECURE",
+      "metadata": {},
+      "interfaces": [
+        {
+          "id": 1,
+          "interfaceName": "HTTP-SECURE-JSON",
+          "createdAt": "2021-12-02T12:49:48Z",
+          "updatedAt": "2021-12-02T12:49:48Z"
+        }
+      ],
+      "version": 0,
+      "authorizationTokens": null,
+      "warnings": []
+    }
+  ]
+}
+```
+
+A válaszból pl jq segítségével kényelmesen illeszthetőek az adatok, az alábbi példa az orchestrációs adatok felhasználásval csatlakozik a providerehz és kéri le az információt:
+
+```
+curl -X GET $(jq -r '.[] | .[] | .provider.address' out.log):$(jq -r '.[] | .[] | .provider.port' out.log)
+```
